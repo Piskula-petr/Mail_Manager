@@ -239,12 +239,55 @@ $(function() {
 			}
 		});
 	});
-    
-// Odpověď na email /////////////////////////////////////////////////////////////////////////////////
 	
+// Nastavení názvu složky ///////////////////////////////////////////////////////////////////////////
+	
+	var folderName;
+	
+	$.fn.getFolderName = function() {
+		
+		switch (currentFolder) {
+		
+			case "dorucene":
+				folderName = "INBOX";
+				break;
+				
+			case "odeslane":
+				folderName = "sent";
+				break;
+				
+			case "rozepsane":
+				folderName = "drafts";
+				break;
+				
+			case "hromadne":
+				folderName = "newsletters"
+				break;
+				
+			case "archiv":
+				folderName = "archive";
+				break;
+				
+			case "spam":
+				folderName = "spam";
+				break;
+				
+			case "kos":
+				folderName = "trash";
+				break;
+		}
+	}
+	
+// Odpověď na email /////////////////////////////////////////////////////////////////////////////////
+
 	$("#buttonPanel #reply").on("click", function() {
 		
-		$("#replyForm input").val(detailIndex);
+		$("#replyForm #detailIndex").val(detailIndex);
+		
+		// Nastavení názvu složky
+		$.fn.getFolderName();
+		
+		$("#replyForm #folderName").val(folderName);
 		
 		$("#replyForm").submit();
 	});
@@ -253,7 +296,12 @@ $(function() {
 	
 	$("#buttonPanel #replyAll").on("click", function() {
 		
-		$("#replyAllForm input").val(detailIndex);
+		$("#replyAllForm #detailIndex").val(detailIndex);
+		
+		// Nastavení názvu složky
+		$.fn.getFolderName();
+		
+		$("#replyAllForm #folderName").val(folderName);
 		
 		$("#replyAllForm").submit();
 	});
@@ -262,7 +310,12 @@ $(function() {
 	
 	$("#buttonPanel #resend").on("click", function() {
 		
-		$("#resendForm input").val(detailIndex);
+		$("#resendForm #detailIndex").val(detailIndex);
+		
+		// Nastavení názvu složky
+		$.fn.getFolderName();
+		
+		$("#resendForm #folderName").val(folderName);
 		
 		$("#resendForm").submit();
 	});

@@ -44,9 +44,8 @@
 					</td>
 					
 					<td>
-						<form:select path="emailServer">
-							<form:option value="@seznam.cz">@seznam.cz</form:option>
-						</form:select>
+						<div id="emailServer">@seznam.cz</div>
+						<form:input path="emailServer" value="@seznam.cz" hidden="true"/>
 					</td>
 				</tr>
 				

@@ -28,7 +28,7 @@ body {
 #seznam {
 	position: absolute;
 	top: -115px;
-	right: 0px;
+	right: -95px;
 	text-decoration: none;
 	transition: all 0.3s ease-in-out;
 }
@@ -37,19 +37,7 @@ body {
 	transform: scale(1.1, 1.1);
 }
 
-#google {
-	position: absolute;
-	top: -115px;
-	right: -110px;
-	text-decoration: none;
-	transition: all 0.3s ease-in-out;
-}
-
-#google:hover {
-	transform: scale(1.1, 1.1);
-}
-
-#seznam img, #google img {
+#seznam img {
 	max-width: 90px;
 }
 
@@ -106,9 +94,9 @@ body {
 }
 
 #errorContainer #errorTitle {
-	font-size: 1.8em;
+	font-size: 2em;
 	font-weight: bold;
-	margin: 0px 0px 25px 0px;
+	margin: 0px 0px 35px 0px;
 }
 
 #errorContainer .errorMessage {

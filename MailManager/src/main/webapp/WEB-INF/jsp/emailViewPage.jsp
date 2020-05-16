@@ -177,21 +177,24 @@
 	    					
 	    					<!-- Odpověď -->
 	    					<form id="replyForm" method="post" action="odpoved" hidden="hidden">
-	    						<input name="detailIndex" hidden="hidden">
+	    						<input id="detailIndex" name="detailIndex" hidden="hidden">
+	    						<input id="folderName" name="folderName" hidden="hidden">
 	    					</form>
 	    					
 	    					<button id="reply">Odpovědět</button>
 	    					
 	    					<!-- Odpověď všem -->
 	    					<form id="replyAllForm" method="post" action="odpoved-vsem" hidden="hidden">
-	    						<input name="detailIndex" hidden="hidden">
+	    						<input id="detailIndex" name="detailIndex" hidden="hidden">
+	    						<input id="folderName" name="folderName" hidden="hidden">
 	    					</form>
 	    					
 	    					<button id="replyAll">Odpovědět všem</button>
 	    					
 	    					<!-- Pčeposlat -->
 	    					<form id="resendForm" method="post" action="preposlat" hidden="hidden">
-	    						<input name="detailIndex" hidden="hidden">
+	    						<input id="detailIndex" name="detailIndex" hidden="hidden">
+	    						<input id="folderName" name="folderName" hidden="hidden">
 	    					</form>
 	    					
 	    					<button id="resend">Přeposlat</button>

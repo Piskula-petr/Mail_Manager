@@ -28,7 +28,7 @@ body {
 #seznam {
 	position: absolute;
 	top: -115px;
-	right: 0px;
+	right: -95px;
 	text-decoration: none;
 	transition: all 0.3s ease-in-out;
 }
@@ -37,19 +37,7 @@ body {
 	transform: scale(1.1, 1.1);
 }
 
-#google {
-	position: absolute;
-	top: -115px;
-	right: -110px;
-	text-decoration: none;
-	transition: all 0.3s ease-in-out;
-}
-
-#google:hover {
-	transform: scale(1.1, 1.1);
-}
-
-#seznam img, #google img {
+#seznam img {
 	max-width: 90px;
 }
 
@@ -126,6 +114,14 @@ table td {
 	border-left: none;
 	border-right: none;
 	border-top: none;
+}
+
+#loginForm #emailServer {
+	border: 1px solid #EEE;
+	margin: 0px 0px 4px 12px;
+	text-align: center;
+	font-size: 1.1em;
+	padding: 2px 4px;
 }
 
 #loginForm input:-webkit-autofill, #loginForm input:-webkit-autofill:hover,
