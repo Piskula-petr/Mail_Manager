@@ -1,0 +1,171 @@
+body {
+	font-family: "Verdana";
+	background-image: linear-gradient(to right, #333333, #3b3b3b);
+}
+
+/*__________________________________ logo __________________________________*/
+
+#logo {
+	font-weight: bold;
+	font-size: 1.8em;
+	float: left;
+}
+
+#logo img {
+	position: absolute;
+	top: -104px;
+	left: -95px;
+	max-width: 85px;
+}
+
+#logo span {
+	position: absolute;
+	color: #333333;
+	top: -81px;
+	left: 5px;
+}
+
+#seznam {
+	position: absolute;
+	top: -115px;
+	right: 0px;
+	text-decoration: none;
+	transition: all 0.3s ease-in-out;
+}
+
+#seznam:hover {
+	transform: scale(1.1, 1.1);
+}
+
+#google {
+	position: absolute;
+	top: -115px;
+	right: -110px;
+	text-decoration: none;
+	transition: all 0.3s ease-in-out;
+}
+
+#google:hover {
+	transform: scale(1.1, 1.1);
+}
+
+#seznam img, #google img {
+	max-width: 90px;
+}
+
+#rhombus {
+	z-index: -1;
+	position: absolute;
+	top: -105px;
+	left: -95px;
+	height: 75px;
+	width: 75px;
+	transform: rotate(-45deg);
+	border: 6px solid white;
+	border-radius: 3px;
+	background: #B22222;
+}
+
+#rectangle {
+	z-index: -2;
+	position: absolute;
+	top: -88px;
+	left: -23px;
+	height: 50px;
+	width: 245px;
+	background: white;
+}
+
+#triangle {
+	z-index: -2;
+	position: absolute;
+	top: -88px;
+	left: 222px;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 25px 0 25px 20px;
+	border-color: transparent transparent transparent white;
+}
+
+/*__________________________________ přihlašovací formůlář __________________________________*/
+
+#loginForm {
+	border: 4px solid white;
+	border-radius: 3px;
+	height: 350px;
+	width: 450px;
+	position: absolute;
+	margin: auto;
+	padding: 30px 20px 30px 25px;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	color: white;
+}
+
+#loginForm #login {
+	font-size: 1.8em;
+	font-weight: bold;
+}
+
+table td {
+	font-size: 1.4em;
+	padding: 40px 0px 0px 0px;
+}
+
+#loginForm input {
+	height: 30px;
+	font-size: 1.1em;
+	margin: 0px 5px 0px 5px;
+	width: 100%;
+	background: transparent;
+	color: white;
+	border-bottom: 1px solid #B22222;
+	border-left: none;
+	border-right: none;
+	border-top: none;
+}
+
+#loginForm input:-webkit-autofill, #loginForm input:-webkit-autofill:hover,
+#loginForm input:-webkit-autofill:focus, #loginForm input:-webkit-autofill:active {
+	-webkit-text-fill-color: #EEE;
+	-webkit-transition-delay: 99999s;
+}
+
+#loginForm input:-webkit-autofill::first-line {
+  font-size: 22px;
+}
+
+#loginForm select {
+	background: #3b3b3b;
+	font-size: 1em;
+	height: 33px;
+	margin: 0px 0px 0px 10px;
+	color: white;
+}
+
+#loginForm input:focus, #loginForm select:focus, #loginForm button {
+	outline: none;
+}
+
+#loginForm button {
+	margin: 50px 0px 0px 0px;
+	padding: 10px 20px;
+	font-size: 1.5em;
+	font-weight: bold;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	background: transparent;
+	border: 2px solid #B22222;
+	border-radius: 3px;
+	cursor: pointer;
+	transition: background 0.5s ease-in-out;
+	color: white;
+}
+
+#loginForm button:hover, #loginForm button:focus {
+	background: #B22222;
+}

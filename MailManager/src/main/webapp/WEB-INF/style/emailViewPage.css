@@ -1,0 +1,404 @@
+html {
+	font-family: "Verdana";
+    background-image: linear-gradient(to right, #333333, #3b3b3b);
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+#mainBody {
+	font-family: "Verdana";
+	font-size: 1em;
+	padding: 0;
+	margin: 0;
+	line-height: normal;
+}
+
+/*_______________________________ navigace _______________________________*/
+
+#navigation {
+    float: left;
+    height: 100vh;
+    width: 200px;
+}
+
+#navigation #newEmail {
+	position: absolute;
+    top: 25px;
+    margin: 0px 0px 70px 17px;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration: none;
+    color: #EEE;
+    background: transparent;
+    border: 2px solid #B22222;
+    border-radius: 3px;
+    transition: background 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+#navigation #newEmail:hover {
+    background: #B22222;
+}
+
+#navigation #newEmail:focus {
+	outline: none;
+}
+
+#navigation #messageCountHidden {
+	display: none;
+}
+
+#navigation #messageCount {
+	font-size: 1.3em;
+	color: #EEE;
+	margin: 100px 0px 0px 0px;
+	padding: 0px 0px 20px 30px;
+}
+
+#navigation table tr td {
+    font-size: 1.3em;
+    width: 200px;
+    padding: 10px 0px 10px 25px;
+    border-left: 3px solid transparent;
+}
+
+#navigation table a {
+	text-decoration: none;
+	color: #EEE;
+}
+
+#navigation table a:hover {
+	cursor: pointer;
+}
+
+#navigation table tr td:hover {
+    border-left: 3px solid #B22222;
+}
+
+#navigation .active {
+    border-left: 3px solid #B22222;
+}
+
+/*_______________________________ seznam emailů _______________________________*/
+
+#emailList {
+    float: left;
+    width: 425px;
+    height: 100vh;
+    overflow-y: auto;
+    margin: 0px;
+    padding: 0px;
+    border: 3px solid #555151;
+    background: #333333;
+}
+
+#emailList #emailContainer {
+	margin: 0px;
+	padding: 0px;
+	background: #333333;
+}
+
+#emailList #emailContainer:hover {
+	cursor: pointer;
+    background: #555151;
+}
+
+.activeEmail {
+	background: #555151;
+}
+
+#emailList #emailContainer table {
+	margin: 0px;
+	padding: 0px;
+	border-left: 4px solid transparent;
+	border-bottom: 1px solid #555151;
+}
+
+#emailList #index {
+	width: 25px;
+	color: #C2C2C2;
+	padding: 0px 0px 0px 5px;
+}
+
+#emailList #isSeen {
+	display: none;
+}
+
+#emailList #sender {
+    width: 362px;
+    margin: 0;
+    padding: 10px 20px 5px 5px;
+    font-size: 1.4em;
+    color: #EEE;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#emailList #subject {
+	color: #C2C2C2;
+	width: 362px;
+	padding: 0px 20px 5px 5px;
+	text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#emailList #sentDate {
+	display: inline-block;
+	width: 177px;
+	color: #C2C2C2;
+	padding: 0px 0px 20px 5px;
+}
+
+#emailList #sentTime {
+	display: inline-block;
+	width: 177px;
+	text-align: right;
+	color: #C2C2C2;
+	padding: 0px 20px 20px 0px;
+}
+
+#emailList #content {
+	display: none;
+}
+
+#emailList::-webkit-scrollbar {
+    display: none;
+}
+
+/*_______________________________ načítání _______________________________*/
+
+#loaderContainer {
+    height: 70px;
+    margin: -9px 0px 0px 0px;
+    padding: 0px;
+    background: #333333;
+}
+
+#loader, #loader:before, #loader:after {
+    border-radius: 50%;
+    width: 2em;
+    height: 2em;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation: load 1.8s infinite ease-in-out;
+    animation: load 1.8s infinite ease-in-out;
+}
+
+#loader {
+    color: #EEE;
+    font-size: 10px;
+    margin: 10px auto 56px auto;
+    position: relative;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+}
+
+#loader:before, #loader:after {
+    content: '';
+    position: absolute;
+    top: 0;
+}
+#loader:before {
+    left: -3.5em;
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+}
+#loader:after {
+    left: 3.5em;
+}
+
+@-webkit-keyframes load {
+    0%,
+    80%,
+    100% {
+        box-shadow: 0 2.5em 0 -1.3em;
+    }
+    
+    40% {
+        box-shadow: 0 2.5em 0 0;
+    }
+}
+
+@keyframes load {
+    0%,
+    80%,
+    100% {
+        box-shadow: 0 2.5em 0 -1.3em;
+    }
+    
+    40% {
+        box-shadow: 0 2.5em 0 0;
+    }
+}
+
+/*_______________________________ obsah emailu _______________________________*/
+
+#emailContent {
+	margin: 0px 0px 0px 0px;
+    color: #EEE;
+    width: calc(100% - 631px);
+    height: 100vh;
+    overflow: auto;
+    display: none;
+}
+
+#emailContent table {
+	margin: 0px;
+	padding: 30px 0px 0px 30px;
+}
+
+#emailContent #subject {
+	font-size: 1.7em;
+	font-weight: bold;
+	text-decoration: underline;
+	margin: -10px 0px 20px 0px;
+}
+
+#emailContent #sender, #emailContent #recipient, #emailContent #copy,
+#emailContent #sentDate, #emailContent #attachedFile {
+	width: 120px;
+	padding: 3px 0px;
+	font-size: 1.25em;
+	white-space: nowrap;
+}
+
+#emailContent #senderValue, #emailContent #recipientValue, 
+#emailContent #copyValue, #emailContent #sentDateValue {
+	width: 100%;
+	font-size: 1.1em;
+	white-space: nowrap;
+}
+
+#emailContent #attachedFileValue a {
+	font-size: 1.1em;
+	color: #EEE;
+	float: left;
+	padding: 10px;
+	margin: 10px 20px 0px 0px;
+	border: 2px solid #B22222;
+	border-radius: 3px;
+	text-decoration: none;
+	transition: background 0.5s ease-in-out;
+}
+
+#emailContent #attachedFileValue a:hover {
+	background: #B22222;
+}
+
+#emailContent #attachedFileValue a img {
+	float: left;
+	padding: 3px 10px 0px 0px;
+	width: 40px;
+	height: 40px;
+}
+
+#emailContent #attachedFileValue a div {
+	float: right;
+}
+
+#emailContent #attachedFileValue a div:last-of-type {
+	padding: 3px 0px 0px 0px;
+	clear: right;
+}
+
+/*_______________________________ panel tlačítek (detail emailu) _______________________________*/
+
+#buttonPanel {
+	float: left;
+	border: 2px solid #B22222;
+	border-radius: 3px;
+	margin: 30px 0px 0px 0px;
+}
+
+#buttonPanel button {
+	float: left;
+	color: #EEE;
+	border: none;
+	font-size: 1.2em;
+	font-weight: bold;
+	background: transparent;
+	padding: 10px 20px;
+	cursor: pointer;
+	transition: background 0.5s ease-in-out;
+}
+
+#buttonPanel button:hover {
+	background: #B22222;
+}
+
+#buttonPanel button:focus {
+	outline: none;
+	background-color: #B22222;
+}
+
+#buttonPanel img {
+	float: right;
+	width: 12px;
+	padding: 0px;
+	margin: 7px 0px 0px 7px;
+}
+
+#buttonPanel #dropdown {
+	display: none;
+	position: absolute;
+	color: #EEE;
+	background: #333333;
+	z-index: 1;
+	min-width: 151px;
+	margin: 42px 0px 0px -2px;
+	border: 2px solid #B22222;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+
+#buttonPanel #dropdown div {
+	padding: 10px 20px;
+	font-size: 1.2em;
+	border-bottom: 1px solid #515151;
+}
+
+#buttonPanel #dropdown div:hover {
+	background: #555151;
+	cursor: pointer;
+}
+
+#emailContent #content {
+	overflow: auto;
+	background: #EEE;
+	color: black;
+	border-radius: 3px;
+	margin: 30px;
+	border: 3px solid #EEE;
+	padding: 20px;
+}
+
+#emailContent #backToTop {
+	display: none;
+	z-index: 1;
+	position: absolute;
+	bottom: 40px;
+	right: 60px;
+	transition: all 0.3s ease-in-out;
+}
+
+#emailContent #backToTop:hover {
+	cursor: pointer;
+	transform: scale(1.1, 1.1);
+}
+
+#emailContent #arrowColor {
+	z-index: -1;
+	position: absolute;
+	top: 9px;
+	left: 9px;
+	width: 30px;
+	height: 30px;
+	background: #EEE;
+}

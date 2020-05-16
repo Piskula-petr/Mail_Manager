@@ -1,0 +1,209 @@
+html, body {
+	font-family: "Verdana";
+    background-image: linear-gradient(to right, #333333, #3b3b3b);
+    padding: 0;
+    margin: 0;
+}
+
+/*_______________________________ navigace _______________________________*/
+
+#navigation {
+    float: left;
+    height: 100vh;
+    width: 200px;
+}
+
+#navigation #newEmail {
+	position: absolute;
+    top: 25px;
+    margin: 0px 0px 70px 17px;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration: none;
+    color: #EEE;
+    background: #B22222;
+    border: 2px solid #B22222;
+    border-radius: 3px;
+}
+
+#navigation table {
+	margin: 100px 0px 0px 0px;
+}
+
+#navigation table tr td {
+    font-size: 1.3em;
+    width: 200px;
+    padding: 10px 0px 10px 25px;
+    border-left: 3px solid transparent;
+}
+
+#navigation table a {
+	text-decoration: none;
+	color: #EEE;
+}
+
+#navigation table a:hover {
+	cursor: pointer;
+}
+
+#navigation table tr td:hover {
+    border-left: 3px solid #B22222;
+}
+
+/*_______________________________ formulář nového emailu _______________________________*/
+
+#emailForm {
+	float: left;
+	background: transparent;
+	height: 100vh;
+	width: calc(100% - 203px);
+	margin: 0px;
+    padding: 0px;
+	border-left: 3px solid #555151;
+	overflow: hidden;
+}
+
+#emailForm table {
+	padding: 10px 30px 30px 30px;
+	width: 100%;
+	height: 100%;
+	font-size: 1.25em;
+	color: #EEE;
+}
+
+#emailForm table tr td {
+	padding: 15px 0px 0px 0px;
+	margin: 0px;
+}
+
+#emailForm #header {
+	width: 120px;
+	height: 25px;
+}
+
+#emailForm input {
+	height: 25px;
+	width: 100%;
+	background: transparent;
+	font-size: 1.1em;
+	color: #EEE;
+	border: none;
+	border-bottom: 1.5px solid #808080;
+	outline: none;
+	padding: 2px 0px;
+	margin: 0px;
+}
+
+#emailForm input:focus {
+	border-color: #EEE;
+}
+
+#emailForm input:-webkit-autofill, #emailForm input:-webkit-autofill:hover,
+#emailForm input:-webkit-autofill:focus, #emailForm input:-webkit-autofill:active {
+	-webkit-text-fill-color: #EEE;
+	-webkit-transition-delay: 99999s;
+}
+
+#emailForm input:-webkit-autofill::first-line {
+  font-size: 22px;
+}
+
+#emailForm #fileLabel {
+	font-size: 1.1em;
+	color: #EEE;
+	float: left;
+	padding: 10px;
+	margin: 10px 20px 0px 0px;
+	border: 2px solid #B22222;
+	border-radius: 3px;
+	text-decoration: none;
+	transition: background 0.5s ease-in-out;
+}
+
+#emailForm #fileLabel:hover {
+	cursor: pointer;
+	background: #B22222;
+}
+
+#emailForm #fileLabel img {
+	width: 40px;
+	height: 40px;
+	padding: 5px 10px 0px 0px;
+}
+
+#emailForm #totalSize {
+	padding: 5px 0px 0px 0px;
+}
+
+#emailForm #files table {
+	margin: 0;
+	padding: 0;
+	font-size: 1em;
+}
+
+#emailForm #files table tr td {
+	margin: 0;
+	padding: 0;
+	text-align: right;
+}
+
+#emailForm #files #remove {
+	width: 25px;
+	height: 25px;
+	padding: 5px;
+	margin: 5px 0px 0px 15px;
+	transition: all 0.4s ease-in-out;
+}
+
+#emailForm #files #remove:hover {
+	transform: scale(1.25, 1.25);
+}
+
+#emailForm #files input[type="file"] {
+	display: none;
+}
+
+#emailForm #content {
+	margin: 40px 0px 0px 0px;
+	border: 1.5px solid #808080;
+	border-radius: 3px;
+	outline: none;
+	width: 100%;
+	height: 96%;
+	font-size: 1.1em;
+	background: transparent;
+	color: #EEE;
+	resize: none;
+}
+
+#emailForm #content:focus {
+	border-color: #EEE;
+}
+
+#emailForm #submitButton {
+	height: 50px;
+}
+
+#emailForm #sendEmail {
+	float: right;
+	font-size: 1.2em;
+	font-weight: bold;
+	margin: 0px -7px 0px 0px;
+	padding: 10px 20px;
+	border: 2px solid #B22222;
+	border-radius: 3px;
+	color: #EEE;
+	background: transparent;
+	transition: background 0.5s ease-in-out;
+	cursor: pointer;
+}
+
+#emailForm #sendEmail:hover {
+	background: #B22222;
+}
+
+#emailForm #sendEmail:focus {
+	background: #B22222;
+	outline: none;
+}
