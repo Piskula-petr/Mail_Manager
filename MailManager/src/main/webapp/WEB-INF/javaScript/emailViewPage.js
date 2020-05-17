@@ -166,8 +166,8 @@ $(function() {
 				
 				var messageCount = $("#messageCountHidden").text();
 				
-				// Přidání načítání, pokud je dostatek emailů
-				if (messageCount > 15) {
+				// Přidání načítání
+				if (messageCount > 15 && !$("#emailList #loaderContainer").length) {
 					
 					$("#emailList").append("<div id='loaderContainer'>" +
 					   					   		"<div id='loader'></div> " +
@@ -229,8 +229,8 @@ $(function() {
 				
 				var messageCount = $("#messageCountHidden").text();
 				
-				// Přidání načítání, pokud je dostatek emailů
-				if (messageCount > 15) {
+				// Přidání načítání
+				if (messageCount > 15 && !$("#emailList #loaderContainer").length) {
 					
 					$("#emailList").append("<div id='loaderContainer'>" +
 					   					   		"<div id='loader'></div> " +
