@@ -23,59 +23,35 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.mail.util.MimeMessageParser;
+import org.springframework.stereotype.Component;
 
 import com.sun.mail.imap.IMAPFolder;
 import com.sun.mail.imap.SortTerm;
 
-import cz.mail_manager.beans.AttachedFile;
-import cz.mail_manager.beans.Email;
-import cz.mail_manager.beans.User;
+import cz.mail_manager.pojo.AttachedFile;
+import cz.mail_manager.pojo.Email;
+import cz.mail_manager.pojo.User;
 
+@Component
 public class ReceivedEmails {
 
-	// Parametry pro připojení k serveru
-	private String imapServer;
-	private String storeType;
+	// Přihlašovací parametry
 	private String email;
 	private String password;
-	private Store emailStore;
 	
 	// Celkový počet emailů
 	private int messageCount;
 	
+	private Session emailSession;
+	
 // Konstruktor /////////////////////////////////////////////////////////////////////////////////////
 	
-	public ReceivedEmails(User user) {
+	public ReceivedEmails() {
 		
-		// Nastavení parametrů připojení
-		email = user.getEmail() + user.getEmailServer();
-		password = user.getPassword();
-
-		// Seznam.cz
-		imapServer = "imap.seznam.cz";
-		storeType = "imap";
+		Properties properties = new Properties();
+		properties.put("mail.store.protocol", "imap");
 		
-		try {
-			
-// Připojení na server /////////////////////////////////////////////////////////////////////////////
-			
-			Properties properties = new Properties();
-			properties.put("mail.store.protocol", storeType);
-			
-			Session emailSession = Session.getDefaultInstance(properties);
-			
-			emailStore = emailSession.getStore(storeType);
-			emailStore.connect(imapServer, email, password);
-			
-		} catch (NoSuchProviderException e) {
-			e.printStackTrace();
-		
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
+		emailSession = Session.getDefaultInstance(properties);
 	}
 	
 	/**
@@ -83,6 +59,7 @@ public class ReceivedEmails {
 	 * 
 	 * 	@param folderType - typ složky ( INBOX, sent, drafts, newsletters, archive, spam, trash )
 	 *  @param lastIndex - index posledního načteného emailu
+	 *  
 	 * 	@return - vrací List základních informácí o emailech
 	 */
 	public List<Email> getEmailsHeader(String folderType, int lastIndex) {
@@ -91,6 +68,9 @@ public class ReceivedEmails {
 		
 		try {
 
+			Store emailStore = emailSession.getStore("imap");
+			emailStore.connect("imap.seznam.cz", email, password);
+			
 			IMAPFolder emailFolder = (IMAPFolder) emailStore.getFolder(folderType);
 			emailFolder.open(Folder.READ_ONLY);
 			
@@ -157,10 +137,11 @@ public class ReceivedEmails {
 	}
 	
 	/**
-	 * 	Získání nových emailů
+	 * 	Obnovení nenačtených emailů
 	 * 
 	 * 	@param folderType - typ složky ( INBOX, sent, drafts, newsletters, archive, spam, trash )
-	 * 	@param sentDate - poslední datum odeslání emailu
+	 * 	@param sentDate - datum odeslání emailu
+	 * 
 	 * 	@return vrací List nových emailů
 	 */
 	public List<Email> refreshEmailsHeader(String folderType, String sentDate) {
@@ -168,6 +149,9 @@ public class ReceivedEmails {
 		List<Email> emails = new ArrayList<>();
 		
 		try {
+			
+			Store emailStore = emailSession.getStore("imap");
+			emailStore.connect("imap.seznam.cz", email, password);
 			
 			IMAPFolder emailFolder = (IMAPFolder) emailStore.getFolder(folderType);
 			emailFolder.open(Folder.READ_ONLY);
@@ -232,8 +216,9 @@ public class ReceivedEmails {
 	/**
 	 * 	Získání detailu o emailu
 	 * 
-	 * 	@param detailIndex - index emailu
 	 * 	@param folderType - typ složky ( INBOX, sent, drafts, newsletters, archive, spam, trash )
+	 * 	@param detailIndex - index emailu
+	 * 
 	 * 	@return - vrací detailní informace o emailu
 	 */
 	public Email getEmailDetail(String folderType, int detailIndex) {
@@ -242,6 +227,9 @@ public class ReceivedEmails {
 		
 		try {
 
+			Store emailStore = emailSession.getStore("imap");
+			emailStore.connect("imap.seznam.cz", this.email, password);
+			
 			IMAPFolder emailFolder = (IMAPFolder) emailStore.getFolder(folderType);
 			emailFolder.open(Folder.READ_WRITE);
 			
@@ -318,35 +306,7 @@ public class ReceivedEmails {
 		
 // Obsah ///////////////////////////////////////////////////////////////////////////////////////////
 			
-			String contentHTML = "";
-			
-			// Zpracování textových emailů
-			if (message.isMimeType("text/plain")) {
-				
-				String[] lines = mimeMessageParser.getPlainContent().split("\n");
-				
-				for (int i = 0; i < lines.length; i++) {
-					
-					if (lines[i].isBlank()) {
-						
-						contentHTML = contentHTML + "<br><br>";
-						
-					} else contentHTML = contentHTML + "<div>" + lines[i] + "</div>";
-				}
-				
-			// Zpracování kombinovaných emailů
-			} else if (message.isMimeType("multipart/*") || message.isMimeType("text/html")) {
-				
-				// Obsah emailu jen v tagu <body>
-				if (mimeMessageParser.getHtmlContent().contains("<body") && mimeMessageParser.getHtmlContent().contains("/body>") ) {
-					
-					int starIndextBody = mimeMessageParser.getHtmlContent().indexOf("<body");
-					int endIndexBody = mimeMessageParser.getHtmlContent().lastIndexOf("/body>");
-					
-					contentHTML = mimeMessageParser.getHtmlContent().substring(starIndextBody, endIndexBody + 6);
-					
-				} else contentHTML = mimeMessageParser.getHtmlContent().toString();
-			}
+			String contentHTML = contentProcessing(mimeMessageParser);
 			email.setContent(contentHTML);
 			
 // List přiložených souborů ////////////////////////////////////////////////////////////////////////
@@ -358,7 +318,7 @@ public class ReceivedEmails {
 				int index = 1;
 				for (DataSource dataSource : mimeMessageParser.getAttachmentList()) {
 					
-					// Nahrazení Content ID za URI schematem
+					// Nahrazení Content ID za URI schema
 					if (contentHTML.contains("cid:")) {
 						
 						// Index začátku atributu CID
@@ -367,7 +327,7 @@ public class ReceivedEmails {
 						// Typ uvozovek ('', "")
 						String quotationMarksType = String.valueOf(contentHTML.charAt(startIndexCID - 1));
 						
-						// Index konce atributu CID
+						// Index konce atributu CID (koncových uvozovek)
 						int endIndexCID = startIndexCID + contentHTML.substring(startIndexCID).indexOf(quotationMarksType);
 						
 						String CID = contentHTML.substring(startIndexCID, endIndexCID);
@@ -397,7 +357,7 @@ public class ReceivedEmails {
 					float sizeKB = dataSource.getInputStream().available();
 					sizeKB = Math.round(sizeKB / 1024);
 					
-					// Přidání jednotky
+					// Přidání jednotky k velikosti souboru
 					if (sizeKB < 1000) {
 						
 						attachedFile.setFileSize(String.valueOf((int) sizeKB) + " kB");
@@ -431,8 +391,8 @@ public class ReceivedEmails {
 	/**
 	 * 	Přesunutí emailu do jiné složky
 	 * 
-	 * 	@param detailIndex - index emailu
 	 * 	@param folderType - typ složky ( INBOX, sent, drafts, newsletters, archive, spam, trash )
+	 * 	@param detailIndex - index emailu
 	 * 	@param folder - název nové složky
 	 */
 	public void move(String folderType, int detailIndex, String folder) {
@@ -441,6 +401,9 @@ public class ReceivedEmails {
 			
 			// Změna složky, pokud není stejná jako aktuální
 			if (folderType != folder) {
+				
+				Store emailStore = emailSession.getStore("imap");
+				emailStore.connect("imap.seznam.cz", email, password);
 				
 				// Aktuální složka
 				IMAPFolder emailFolder = (IMAPFolder) emailStore.getFolder(folderType);
@@ -476,12 +439,15 @@ public class ReceivedEmails {
 	/**
 	 * 	Smazání emailu (přesun do koše)
 	 * 
-	 * 	@param detailIndex - index emailu
 	 * 	@param folderType - typ složky ( INBOX, sent, drafts, newsletters, archive, spam, trash )
+	 * 	@param detailIndex - index emailu
 	 */
 	public void delete(String folderType, int detailIndex) {
 		
 		try {
+			
+			Store emailStore = emailSession.getStore("imap");
+			emailStore.connect("imap.seznam.cz", email, password);
 			
 			// Aktuální složka
 			IMAPFolder emailFolder = (IMAPFolder) emailStore.getFolder(folderType);
@@ -518,10 +484,12 @@ public class ReceivedEmails {
 	}
 	
 	/**
-	 * 	Nastavení emailu (odpověď, odpověď všem, přeposlat)
+	 * 	Přednastavení emailu (odpověď, odpověď všem, přeposlat)
 	 * 
-	 * 	@param detailIndex - index emailu
 	 * 	@param folderType - typ složky ( INBOX, sent, drafts, newsletters, archive, spam, trash )
+	 * 	@param detailIndex - index emailu
+	 * 	@param replyType - typ odpovědi ( REPLY, REPLY_ALL, RESEND )
+	 * 
 	 * 	@return - vrací předchystaný email
 	 */
 	public Email reply(String folderType, int detailIndex, ReplyType replyType) {
@@ -529,6 +497,9 @@ public class ReceivedEmails {
 		Email email = new Email();
 		
 		try {
+			
+			Store emailStore = emailSession.getStore("imap");
+			emailStore.connect("imap.seznam.cz", this.email, password);
 			
 			Folder emailFolder = emailStore.getFolder(folderType);
 			emailFolder.open(Folder.READ_ONLY);
@@ -548,7 +519,7 @@ public class ReceivedEmails {
 				addressFrom = addressFrom + internetAddressFrom.getPersonal() + " ";
 			}
 			
-			addressFrom = addressFrom + "<" + internetAddressFrom.getAddress().toLowerCase() + ">";
+			addressFrom = addressFrom + "<" + internetAddressFrom.getAddress().toLowerCase() + ">;";
 			email.setFrom(addressFrom);
 			
 // Příjemce /////////////////////////////////////////////////////////////////////////////////////////
@@ -596,64 +567,36 @@ public class ReceivedEmails {
 			
 // Obsah ////////////////////////////////////////////////////////////////////////////////////////////
 			
-			String contentHTML = "";
-			
-			// Zpracování textových emailů
-			if (message.isMimeType("text/plain")) {
-				
-				String[] lines = mimeMessageParser.getPlainContent().split("\n");
-				
-				for (int i = 0; i < lines.length; i++) {
-					
-					if (lines[i].isBlank()) {
-						
-						contentHTML = contentHTML + "<br><br>";
-						
-					} else contentHTML = contentHTML + "<div>" + lines[i] + "</div>";
-				}
-				
-			// Zpracování kombinovaných emailů
-			} else if (message.isMimeType("multipart/*") || message.isMimeType("text/html")) {
-				
-				// Obsah emailu jen v tagu <body>
-				if (mimeMessageParser.getHtmlContent().contains("<body") && mimeMessageParser.getHtmlContent().contains("/body>") ) {
-					
-					int indexStartBody = mimeMessageParser.getHtmlContent().indexOf("<body");
-					int indexEndBody = mimeMessageParser.getHtmlContent().lastIndexOf("/body>");
-					
-					contentHTML = mimeMessageParser.getHtmlContent().substring(indexStartBody, indexEndBody + 6);
-					
-				} else contentHTML = mimeMessageParser.getHtmlContent().toString();
-			}
+			String contentHTML = contentProcessing(mimeMessageParser);
 			
 			// Datum odeslání
 			LocalDateTime localDateTime = message.getReceivedDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
 			
 // Změna na HTML entity /////////////////////////////////////////////////////////////////////////////
 			
-			String from = "Odesilatel: " + email.getFrom().replaceAll("<", "&lt;").replaceAll(">", "&gt;") + "<br>";
+			String from = "Odesilatel: " + email.getFrom().replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 			
 			String to = "";
 			
 			if (!email.getRecipientsTO().isEmpty()) {
 				
-				to = "Příjemce: " + email.getRecipientsTO().replaceAll("<", "&lt;").replaceAll(">", "&gt;") + "<br>";
+				to = "Příjemce: " + email.getRecipientsTO().replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 			}
 
 			String cc = "";
 			
 			if (!email.getRecipientsCC().isEmpty()) {
 				
-				cc = "Kopie: " + email.getRecipientsCC().replaceAll("<", "&lt;").replaceAll(">", "&gt;") + "<br>";
+				cc = "Kopie: " + email.getRecipientsCC().replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 			}
 			
 // Zpráva o původním emailu /////////////////////////////////////////////////////////////////////////
 			
 			String content = "<br><br>"
 						   + "────────── Původní email ────────── <br>"
-						   + from
-						   + to
-						   + cc
+						   + from + "<br>"
+						   + to + "<br>"
+						   + cc + "<br>"
 						   + "Datum: " + localDateTime.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")) + "<br>"
 						   + "Předmět: " + message.getSubject() + "<br>"
 						   + "─────────────────────────────── <br>"
@@ -672,10 +615,70 @@ public class ReceivedEmails {
 		return email;
 	}
 	
-	// Celkový počet emailů
+	/**
+	 * 	@return - vrací celkový počet emailů
+	 */
 	public int getMessageCount() {
 		
 		return messageCount;
+	}
+	
+	/**
+	 * 	Nastavení přihlašovacích parametrů uživatele
+	 * 
+	 * 	@param user - aktuálně přihlášený uživatel
+	 */
+	public void setUser(User user) {
+		
+		email = user.getEmail() + user.getEmailServer();
+		password = user.getPassword();
+	}
+
+	/**
+	 * 	Zpracování obsahu emailu, podle jeho typu
+	 * 
+	 * 	@param mimeMessageParser
+	 * 
+	 * 	@return -  vrací upravený obsah emailu
+	 */
+	private String contentProcessing(MimeMessageParser mimeMessageParser) throws MessagingException {
+		
+		String contentHTML = "";
+		
+		// Zpracování textových emailů
+		if (mimeMessageParser.getMimeMessage().isMimeType("text/plain")) {
+		
+			String[] lines = mimeMessageParser.getPlainContent().split("\n");
+			
+			for (int i = 0; i < lines.length; i++) {
+				
+				// Odřádkování
+				if (lines[i].isEmpty()) {
+					
+					contentHTML = contentHTML + "<br><br>";
+					
+				// Vložení řádku do div tagu
+				} else contentHTML = contentHTML + "<div>" + lines[i] + "</div>";
+			}
+			
+		// Zpracování kombinovaných emailů + emailů s HTML tagy
+		} else if (mimeMessageParser.getMimeMessage().isMimeType("multipart/*") || 
+				   mimeMessageParser.getMimeMessage().isMimeType("text/html")) {
+			
+			// Obsah emailu jen v tagu <body>
+			if (mimeMessageParser.getHtmlContent().contains("<body") && mimeMessageParser.getHtmlContent().contains("/body>") ) {
+				
+				int starIndextBody = mimeMessageParser.getHtmlContent().indexOf("<body");
+				int endIndexBody = mimeMessageParser.getHtmlContent().lastIndexOf("/body>");
+				
+				// začátek obsahu emailu <body>, konec obsahu emailu včetně </body>
+				// + 6 = délka koncového tagu /body>
+				contentHTML = mimeMessageParser.getHtmlContent().substring(starIndextBody, endIndexBody + 6);
+				
+			} else contentHTML = mimeMessageParser.getHtmlContent().toString();
+		}
+		
+		return contentHTML;
 	}
 	
 }

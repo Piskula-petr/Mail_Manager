@@ -77,7 +77,7 @@
 					<td id="header">Odesilatel: </td>
 					
 					<td>
-						<form:input id="from" path="from" type="text" value="${from};"/>
+						<form:input id="from" path="from" type="text" value="${email.from}"/>
 					</td>
 				</tr>
 				
@@ -85,7 +85,7 @@
 					<td id="header">Příjemce: </td>
 					
 					<td>
-						<form:input id="to" path="recipientsTO" type="text" required="required" value="${to}"/>
+						<form:input id="to" path="recipientsTO" type="text" value="${email.recipientsTO}"/>
 					</td>
 				</tr>
 				
@@ -93,7 +93,7 @@
 					<td id="header">Kopie: </td>
 					
 					<td>
-						<form:input id="cc" path="recipientsCC" type="text" value="${cc}"/>
+						<form:input id="cc" path="recipientsCC" type="text" value="${email.recipientsCC}"/>
 					</td>
 				</tr>
 				
@@ -101,7 +101,7 @@
 					<td id="header">Předmět: </td>
 					
 					<td>
-						<form:input id="subject" path="subject" type="text" value="${subject}"/>
+						<form:input id="subject" path="subject" type="text" value="${email.subject}"/>
 					</td>
 				</tr>
 				
@@ -123,7 +123,7 @@
 				<tr>
 					<td colspan="2">
 						<form:textarea id="emailTextarea" path="content" hidden="hidden"/>
-						<div id="content" contentEditable="true">${content}</div>
+						<div id="content" contentEditable="true">${email.content}</div>
 					</td>
 				</tr>
 				

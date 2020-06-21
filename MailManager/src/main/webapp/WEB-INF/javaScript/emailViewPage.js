@@ -430,6 +430,9 @@ $(function() {
 				// Zobrazení nového obsahu
 				$("#emailContent #content").html(data.content);
 				$("#emailContent").css("display", "block");
+				
+				// Vyscrolluje obsah emailu nahorů
+				$("#emailContent").scrollTop(0);
 			}  
 		});
 	});

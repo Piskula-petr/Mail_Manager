@@ -1,17 +1,16 @@
 html {
-	font-family: "Verdana";
-    background-image: linear-gradient(to right, #333333, #3b3b3b);
     padding: 0;
     margin: 0;
     overflow: hidden;
 }
 
 #mainBody {
-	font-family: "Verdana";
-	font-size: 1em;
-	padding: 0;
-	margin: 0;
-	line-height: normal;
+	font-family: "Verdana" !important;
+	background-image: linear-gradient(to right, #333333, #3b3b3b) !important;
+	font-size: 1em !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	line-height: normal !important;
 }
 
 /*_______________________________ navigace _______________________________*/

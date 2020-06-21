@@ -9,7 +9,7 @@ $(function() {
 	} else if ($("#emailReply").text() == "Odpověď všem") {
 	
 		$("#emailReply").css({"padding": "10px 10px",
-							   "margin-left": "6px"});
+							  "margin-left": "6px"});
 		
 	// Vymazání příjemce a kopie při přeposílání emailu
 	} else if ($("#emailReply").text() == "Přeposlat") {
@@ -27,7 +27,7 @@ $(function() {
 			
 			$("#emailForm #content").css("height", "62.5vh");
 			
-		// Dva řádky (přidat soubor na začátku)
+		// Dva řádky ("přidat soubor" na začátku)
 		} else if ($("#emailForm #files").height() == 155) {
 			
 			$("#emailForm #content").css("height", "57.7vh");
@@ -187,5 +187,45 @@ $(function() {
 		
 		$("#emailForm #emailTextarea").val($("#emailForm #content").html());
 	})
+	
+// Přesunutí emailu do složky rozepsané, při kliknutí na navigační odkazy ///////////////////////////
+	
+	$("#navigation a").on("click", function() {
+		
+		// URL pro více requestů (/novy, /odpoved, /odpoved-vsem, /preposlat)
+		var url = location.pathname.split("/")[2] + "/rozepsany";
+		
+		// Rozdílné umístění obsahu
+		var content;
+		
+		// tag <form:textarea>
+		if (url.includes("novy")) {
+			
+			content = $("#emailForm #content").val();
+			
+		// tag <div>
+		} else content = $("#emailForm #content").html();
+		
+		// Ajax objekt
+		var email = {
+			"from": 			$("#emailForm #from").val(),
+			"recipientsTO": 	$("#emailForm #to").val(),
+			"recipientsCC": 	$("#emailForm #copy").val(),
+			"subject": 			$("#emailForm #subject").val(),
+			"content": 			content
+		};
+		
+		$.ajax({
+			
+			url: url,
+			type: "POST",
+			data: email,
+			dataType: "json",
+			complete: function() {
+				
+				alert("Email byl přesunut do složky rozepsané.");
+			}
+		})
+	});
 	
 });

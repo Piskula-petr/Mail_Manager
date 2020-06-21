@@ -1,11 +1,8 @@
-package cz.mail_manager.beans;
+package cz.mail_manager.pojo;
 
 import java.io.InputStream;
-import java.io.Serializable;
 
-public class AttachedFile implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class AttachedFile {
 
 	private String fileName;
 	private InputStream fileInputStream;

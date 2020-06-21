@@ -1,14 +1,14 @@
-package cz.mail_manager.beans;
+package cz.mail_manager.pojo;
 
-import java.io.Serializable;
+import javax.validation.constraints.NotBlank;
 
-public class User implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class User {
 	
-	// Atributy uživatele
+	@NotBlank
 	private String email;
 	private String emailServer;
+	
+	@NotBlank
 	private String password;
 	
 // Bezparametrový konstruktor ////////////////////////////////////////////////////////////////////////

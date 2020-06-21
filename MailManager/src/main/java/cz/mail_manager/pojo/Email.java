@@ -1,20 +1,23 @@
-package cz.mail_manager.beans;
+package cz.mail_manager.pojo;
 
-import java.io.Serializable;
 import java.util.List;
 
-public class Email implements Serializable {
+import javax.validation.constraints.NotBlank;
 
-	private static final long serialVersionUID = 1L;
+public class Email {
 
 	// Atributy pro náhled emailů
 	private Boolean isSeen;
 	private String from;
+	
+	@NotBlank
 	private String subject;
 	private String sentDate;
 	private String sentTime;
 
 	// Zbývající atributy
+	
+	@NotBlank
 	private String recipientsTO;
 	private String recipientsCC;
 	private String content;

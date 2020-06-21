@@ -40,7 +40,7 @@
 					<td>Email:</td>
 					
 					<td>
-						<form:input path="email" required="required" autofocus="autofocus"/>
+						<form:input path="email" autofocus="autofocus"/>
 					</td>
 					
 					<td>
@@ -53,7 +53,7 @@
 					<td>Heslo:</td>
 					
 					<td>
-						<form:password path="password" required="required" />
+						<form:password path="password" />
 					</td>
 				</tr>
 			</table>
