@@ -195,16 +195,8 @@ $(function() {
 		// URL pro více requestů (/novy, /odpoved, /odpoved-vsem, /preposlat)
 		var url = location.pathname.split("/")[2] + "/rozepsany";
 		
-		// Rozdílné umístění obsahu
-		var content;
-		
-		// tag <form:textarea>
-		if (url.includes("novy")) {
-			
-			content = $("#emailForm #content").val();
-			
-		// tag <div>
-		} else content = $("#emailForm #content").html();
+		// Obsah emailu
+		var content = $("#emailForm #content").html();
 		
 		// Ajax objekt
 		var email = {

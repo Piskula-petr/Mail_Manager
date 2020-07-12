@@ -7,9 +7,9 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		
-		<link rel="stylesheet" type="text/css" href="style//loginPage.css"/>
+		<link rel="stylesheet" type="text/css" href="style//loginPage.css" />
 		
-		<link rel="shortcut icon" href="image//favicon.png" type="image/png"/>
+		<link rel="shortcut icon" href="image//favicon.png" type="image/png" />
 		<title>Mail Manager</title>
 	</head>
 	

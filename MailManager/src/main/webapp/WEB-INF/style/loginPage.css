@@ -134,14 +134,6 @@ table td {
   font-size: 22px;
 }
 
-#loginForm select {
-	background: #3b3b3b;
-	font-size: 1em;
-	height: 33px;
-	margin: 0px 0px 0px 10px;
-	color: white;
-}
-
 #loginForm input:focus, #loginForm select:focus, #loginForm button {
 	outline: none;
 }
