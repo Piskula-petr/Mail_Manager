@@ -12,6 +12,7 @@ Mail manager with basic functions such as viewing and sending emails <br> <br>
 * Back-End
   * Spring MVC
   * Java Mail Api
+  * Lombok
 
 - Front-End
   - JSP / CSS
