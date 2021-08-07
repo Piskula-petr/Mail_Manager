@@ -26,6 +26,7 @@ public class NewEmailController {
 	@Autowired
 	private NewEmail newEmail;
 	
+	
 	/**
 	 * 	Formulář pro odeslání nového emailu
 	 * 
@@ -46,6 +47,7 @@ public class NewEmailController {
 		
 		return "newEmail";
 	}
+	
 	
 	/**
 	 * 	Odeslání nového emailu
@@ -86,6 +88,7 @@ public class NewEmailController {
 		
 		return "redirect:/dorucene";
 	}
+	
 	
 	/**
 	 * 	Přesunutí emailu do složky rozepsané

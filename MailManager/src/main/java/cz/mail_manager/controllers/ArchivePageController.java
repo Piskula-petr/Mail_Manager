@@ -27,6 +27,7 @@ public class ArchivePageController {
 	@Autowired
 	private ReceivedEmails receivedEmails;
 	
+	
 	/**
 	 * 	Archiv emailů
 	 * 
@@ -44,6 +45,7 @@ public class ArchivePageController {
 		
 		return "emailViewPage";
 	}
+	
 	
 	/**
 	 * 	Ajax zobrazení detailu emailů
@@ -67,6 +69,7 @@ public class ArchivePageController {
 		return email;
 	}
 	
+	
 	/**
 	 * 	Zobrazení přiloženého souboru
 	 * 
@@ -83,6 +86,7 @@ public class ArchivePageController {
 		IOUtils.copy(inputStream, response.getOutputStream());
 	}
 	
+	
 	/**
 	 * 	Ajax přesunutí emailu do jiné složky
 	 * 
@@ -95,6 +99,7 @@ public class ArchivePageController {
 		receivedEmails.move("archive", detailIndex, folder);
 	}
 	
+	
 	/**
 	 * 	Ajax smazání emailu	
 	 * 
@@ -105,6 +110,7 @@ public class ArchivePageController {
 		
 		receivedEmails.delete("archive", detailIndex);
 	}
+	
 	
 	/**
 	 * 	Ajax načtení dalších emailů
@@ -120,6 +126,7 @@ public class ArchivePageController {
 		
 		return emails;
 	}
+	
 	
 	/**
 	 * 	Ajax obnovení nových emailů

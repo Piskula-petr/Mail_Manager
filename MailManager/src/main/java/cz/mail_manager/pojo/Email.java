@@ -4,6 +4,13 @@ import java.util.List;
 
 import javax.validation.constraints.NotBlank;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@NoArgsConstructor
+@Getter
+@Setter
 public class Email {
 
 	// Atributy pro náhled emailů
@@ -22,85 +29,5 @@ public class Email {
 	private String recipientsCC;
 	private String content;
 	private List<AttachedFile> attachedFiles;
-	
-// Bezparametrový konstuktor /////////////////////////////////////////////////////////////////////////
-	
-	public Email() {
-		
-	}
-	
-// Gettery + Settery /////////////////////////////////////////////////////////////////////////////////
-	
-	public Boolean getIsSeen() {
-		return isSeen;
-	}
-
-	public void setIsSeen(Boolean isSeen) {
-		this.isSeen = isSeen;
-	}
-
-	public String getFrom() {
-		return from;
-	}
-
-	public void setFrom(String from) {
-		this.from = from;
-	}
-
-	public String getSubject() {
-		return subject;
-	}
-
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
-
-	public String getSentDate() {
-		return sentDate;
-	}
-
-	public void setSentDate(String sentDate) {
-		this.sentDate = sentDate;
-	}
-
-	public String getSentTime() {
-		return sentTime;
-	}
-
-	public void setSentTime(String sentTime) {
-		this.sentTime = sentTime;
-	}
-
-	public String getRecipientsTO() {
-		return recipientsTO;
-	}
-
-	public void setRecipientsTO(String recipientsTO) {
-		this.recipientsTO = recipientsTO;
-	}
-
-	public String getRecipientsCC() {
-		return recipientsCC;
-	}
-
-	public void setRecipientsCC(String recipientsCC) {
-		this.recipientsCC = recipientsCC;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public List<AttachedFile> getAttachedFiles() {
-		return attachedFiles;
-	}
-
-	public void setAttachedFiles(List<AttachedFile> attachedFiles) {
-		this.attachedFiles = attachedFiles;
-	}
 	
 }

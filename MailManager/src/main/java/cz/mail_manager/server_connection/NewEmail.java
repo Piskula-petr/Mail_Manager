@@ -36,8 +36,10 @@ public class NewEmail {
 	
 	private Session emailSession;
 	
-// Konstruktor //////////////////////////////////////////////////////////////////////////////////////
 	
+	/**
+	 * Konstruktor
+	 */
 	public NewEmail() {
 		
 		try {
@@ -61,6 +63,7 @@ public class NewEmail {
 			e.printStackTrace();
 		} 
 	}
+	
 	
 	/**
 	 * 	Odeslání emailu
@@ -133,6 +136,7 @@ public class NewEmail {
 		}
 	}
 	
+	
 	/**
 	 * 	Přesunutí emailu do složky rozepsané
 	 * 
@@ -200,6 +204,7 @@ public class NewEmail {
 		}
 	}
 	
+	
 	/**
 	 * 	Nastavení přihlašovacích parametrů uživatele
 	 * 
@@ -211,6 +216,7 @@ public class NewEmail {
 		password = user.getPassword();
 	}
 
+	
 	/**
 	 * 	Rozložení emailové adresy na jméno + adresu
 	 * 
@@ -241,6 +247,7 @@ public class NewEmail {
 		
 		return new InternetAddress(address, personal);
 	}
+	
 	
 	/**
 	 * 	@return - vrací emailovou adresu uživatele

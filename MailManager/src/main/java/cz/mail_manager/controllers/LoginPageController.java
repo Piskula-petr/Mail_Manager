@@ -26,6 +26,7 @@ public class LoginPageController {
 	@Autowired
 	private NewEmail newEmail;
 	
+	
 	/**
 	 * 	Úvodní přihlašovací stránka
 	 * 
@@ -41,6 +42,7 @@ public class LoginPageController {
 		return "loginPage";
 	}
 
+	
 	/**
 	 * 	Hlavní stránka přehledů emailů
 	 * 

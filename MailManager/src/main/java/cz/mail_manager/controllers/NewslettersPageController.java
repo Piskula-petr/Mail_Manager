@@ -27,6 +27,7 @@ public class NewslettersPageController {
 	@Autowired
 	private ReceivedEmails receivedEmails;
 	
+	
 	/**
 	 * 	Hromadné emaily
 	 * 
@@ -44,6 +45,7 @@ public class NewslettersPageController {
 		
 		return "emailViewPage";
 	}
+	
 	
 	/**
 	 * 	Ajax zobrazení detailu emailů
@@ -67,6 +69,7 @@ public class NewslettersPageController {
 		return email;
 	}
 	
+	
 	/**
 	 * 	Zobrazení přiloženého souboru
 	 * 
@@ -83,6 +86,7 @@ public class NewslettersPageController {
 		IOUtils.copy(inputStream, response.getOutputStream());
 	}
 	
+	
 	/**
 	 * 	Ajax přesunutí emailu do jiné složky
 	 * 
@@ -95,6 +99,7 @@ public class NewslettersPageController {
 		receivedEmails.move("newsletters", detailIndex, folder);
 	}
 	
+	
 	/**
 	 * 	Ajax smazání emailu	
 	 * 
@@ -105,6 +110,7 @@ public class NewslettersPageController {
 		
 		receivedEmails.delete("newsletters", detailIndex);
 	}
+	
 	
 	/**
 	 * 	Ajax načtení dalších emailů
@@ -120,6 +126,7 @@ public class NewslettersPageController {
 		
 		return emails;
 	}
+	
 	
 	/**
 	 * 	Ajax obnovení nových emailů

@@ -27,6 +27,7 @@ public class InboxPageController {
 	@Autowired
 	private ReceivedEmails receivedEmails;
 	
+	
 	/**
 	 * 	Doručené emaily
 	 * 
@@ -44,6 +45,7 @@ public class InboxPageController {
 		
 		return "emailViewPage";
 	}
+	
 	
 	/**
 	 * 	Ajax zobrazení detailu emailů
@@ -67,6 +69,7 @@ public class InboxPageController {
 		return email;
 	}
 	
+	
 	/**
 	 * 	Zobrazení přiloženého souboru
 	 * 
@@ -85,6 +88,7 @@ public class InboxPageController {
 		IOUtils.copy(inputStream, response.getOutputStream());
 	}
 	
+	
 	/**
 	 * 	Ajax přesunutí emailu do jiné složky
 	 * 
@@ -97,6 +101,7 @@ public class InboxPageController {
 		receivedEmails.move("INBOX", detailIndex, folder);
 	}
 	
+	
 	/**
 	 * 	Ajax smazání emailu	
 	 * 
@@ -107,6 +112,7 @@ public class InboxPageController {
 		
 		receivedEmails.delete("INBOX", detailIndex);
 	}
+	
 	
 	/**
 	 * 	Ajax načtení dalších emailů
@@ -122,6 +128,7 @@ public class InboxPageController {
 		
 		return emails;
 	}
+	
 	
 	/**
 	 * 	Ajax obnovení nových emailů

@@ -27,6 +27,7 @@ public class DraftsPageController {
 	@Autowired
 	private ReceivedEmails receivedEmails;
 	
+	
 	/**
 	 * 	Rozepsané emaily
 	 * 
@@ -44,6 +45,7 @@ public class DraftsPageController {
 		
 		return "emailViewPage";
 	}
+	
 	
 	/**
 	 * 	Ajax zobrazení detailu emailů
@@ -67,6 +69,7 @@ public class DraftsPageController {
 		return email;
 	}
 	
+	
 	/**
 	 * 	Zobrazení přiloženého souboru
 	 * 
@@ -83,6 +86,7 @@ public class DraftsPageController {
 		IOUtils.copy(inputStream, response.getOutputStream());
 	}
 	
+	
 	/**
 	 * 	Ajax přesunutí emailu do jiné složky
 	 * 
@@ -95,6 +99,7 @@ public class DraftsPageController {
 		receivedEmails.move("drafts", detailIndex, folder);
 	}
 	
+	
 	/**
 	 * 	Ajax smazání emailu	
 	 * 
@@ -105,6 +110,7 @@ public class DraftsPageController {
 		
 		receivedEmails.delete("drafts", detailIndex);
 	}
+	
 	
 	/**
 	 * 	Ajax načtení dalších emailů
@@ -120,6 +126,7 @@ public class DraftsPageController {
 		
 		return emails;
 	}
+	
 	
 	/**
 	 * 	Ajax obnovení nových emailů

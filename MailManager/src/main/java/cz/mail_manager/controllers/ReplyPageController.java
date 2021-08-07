@@ -33,6 +33,7 @@ public class ReplyPageController {
 	
 	private ReplyType replyType;
 	
+	
 	/**
 	 * 	Přednastavení formuláře, při chybné validaci
 	 * 
@@ -61,6 +62,7 @@ public class ReplyPageController {
 		return "emailReply";
 	}
 	
+	
 	/**
 	 * 	Přednastavení formůláře na odpověď na email
 	 * 
@@ -87,6 +89,7 @@ public class ReplyPageController {
 
 		return "emailReply";
 	}
+	
 	
 	/**
 	 * 	Přednastavení formuláře na odpověď všem
@@ -115,6 +118,7 @@ public class ReplyPageController {
 		return "emailReply";
 	}
 	
+	
 	/**
 	 * 	Přednastavení formuláře na přeposlání emailu
 	 * 
@@ -141,6 +145,7 @@ public class ReplyPageController {
 		
 		return "emailReply";
 	}
+	
 	
 	/**
 	 * 	Odeslání emailu
@@ -180,6 +185,7 @@ public class ReplyPageController {
 		
 		return "redirect:/dorucene";
 	}
+	
 	
 	/**
 	 * 	Přesunutí emailu do složky rozepsané

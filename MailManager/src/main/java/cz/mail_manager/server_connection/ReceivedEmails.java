@@ -44,8 +44,10 @@ public class ReceivedEmails {
 	
 	private Session emailSession;
 	
-// Konstruktor /////////////////////////////////////////////////////////////////////////////////////
 	
+	/**
+	 * Konstruktor
+	 */
 	public ReceivedEmails() {
 		
 		Properties properties = new Properties();
@@ -53,6 +55,7 @@ public class ReceivedEmails {
 		
 		emailSession = Session.getDefaultInstance(properties);
 	}
+	
 	
 	/**
 	 * 	Získání základních informací o emailech
@@ -136,6 +139,7 @@ public class ReceivedEmails {
 		return emails;
 	}
 	
+	
 	/**
 	 * 	Obnovení nenačtených emailů
 	 * 
@@ -212,6 +216,7 @@ public class ReceivedEmails {
 		
 		return emails;
 	}
+	
 	
 	/**
 	 * 	Získání detailu o emailu
@@ -388,6 +393,7 @@ public class ReceivedEmails {
 		return email;
 	}
 
+	
 	/**
 	 * 	Přesunutí emailu do jiné složky
 	 * 
@@ -436,6 +442,7 @@ public class ReceivedEmails {
 		}
 	}
 	
+	
 	/**
 	 * 	Smazání emailu (přesun do koše)
 	 * 
@@ -482,6 +489,7 @@ public class ReceivedEmails {
 			e.printStackTrace();
 		}
 	}
+	
 	
 	/**
 	 * 	Přednastavení emailu (odpověď, odpověď všem, přeposlat)
@@ -615,6 +623,7 @@ public class ReceivedEmails {
 		return email;
 	}
 	
+	
 	/**
 	 * 	@return - vrací celkový počet emailů
 	 */
@@ -622,6 +631,7 @@ public class ReceivedEmails {
 		
 		return messageCount;
 	}
+	
 	
 	/**
 	 * 	Nastavení přihlašovacích parametrů uživatele
@@ -634,6 +644,7 @@ public class ReceivedEmails {
 		password = user.getPassword();
 	}
 
+	
 	/**
 	 * 	Zpracování obsahu emailu, podle jeho typu
 	 * 
